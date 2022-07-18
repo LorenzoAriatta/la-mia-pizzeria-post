@@ -1,4 +1,5 @@
-﻿using System;
+﻿using la_mia_pizzeria_static.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,6 +10,7 @@ public class Pizza
 
     [Required(ErrorMessage = "Il campo è obbligatorio")]
     [StringLength(40, ErrorMessage = "Il nome non può avere più di 40 caratteri")]
+    [MoreWordsValidationAttribute]
     public string Name { get; set; }
 
     [Column (TypeName = "text")]
