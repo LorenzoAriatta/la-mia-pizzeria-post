@@ -46,16 +46,20 @@ namespace la_mia_pizzeria_static.Controllers
         // POST: PizzaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Pizza pizzaModel)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View("Create", pizzaModel);
             }
-            catch
+
+            using (PizzaContext db = new PizzaContext())
             {
-                return View();
+                db.Pizza.Add(pizzaModel);
+                db.SaveChanges();
             }
+
+            return RedirectToAction("Index");
         }
 
         // GET: PizzaController/Edit/5
